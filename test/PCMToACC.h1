@@ -1,0 +1,34 @@
+
+#include <faac.h>
+#include <string>
+#include <memory>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+using namespace std;
+
+class PCM_TO_AAC
+{
+public:
+    PCM_TO_AAC(int samplerate, int chanel, int sample_bit);
+
+    ~PCM_TO_AAC();
+
+    int ConvertProcess(char* pcmbuf, int PcmSize, unsigned char* aacBuf);
+
+private:
+    faacEncHandle   m_hEncoder ;
+    unsigned long   m_InputSample ;
+    unsigned long   m_MaxOutputBytes;
+    int             m_PCMbitSize;
+    int             m_SampleRate;
+    int             m_Channel;
+
+    int m_PCMBufSize;
+    char* m_PtrPCMBuf;
+    char* m_PtrAACBuf;
+
+    faacEncConfigurationPtr m_pConfiguration;
+};
+
